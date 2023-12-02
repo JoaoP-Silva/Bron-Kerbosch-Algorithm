@@ -1,5 +1,31 @@
 #include "nucesGraph.h"
 
+void genGraph(char *argv[], struct nGraph* GG)
+{
+	FILE* fptr;
+	fptr = fopen(argv[1], "r");
+	
+	int numVertex, numEdges;
+
+	fscanf(fptr, "%d", &numVertex);
+	fscanf(fptr, "%d", &numEdges);
+
+	for(int count = 0; count < numVertex; count++)
+	{
+		addVertex(GG, count + 1);
+	}
+
+	for(int i = 0; i < numEdges; i++)
+	{
+		int nodeA, nodeB;
+		fscanf(fptr, "%d", &nodeA);
+		fscanf(fptr, "%d", &nodeB);
+
+		addEdge(GG, nodeA, nodeB, 0);
+
+	}
+}
+
 int main(int argc, char *argv[])
 {
 	int i;
@@ -124,18 +150,7 @@ int main(int argc, char *argv[])
 	//Make Graph GG
 	struct nGraph GG;
 	nGraphInit(&GG,'G');
-	addVertex(&GG, 1);
-	addVertex(&GG, 2);
-	addVertex(&GG, 3);
-	addVertex(&GG, 4);
-	addVertex(&GG, 5);
-
-	addEdge(&GG, 1, 2, 0);
-	addEdge(&GG, 1, 3, 0);
-	addEdge(&GG, 2, 3, 0);
-	addEdge(&GG, 2, 4, 0);
-	addEdge(&GG, 3, 5, 0);
-	addEdge(&GG, 4, 5, 0);
+	genGraph(argv, &GG);
 	
 	listVertices(&GG);
 	listEdges(&GG);
@@ -145,58 +160,6 @@ int main(int argc, char *argv[])
 	printf("%s\n", "");
 	
 	struct nGraph G21=FindingCliques(GG);
-
-	
-	
-	//makeCompleteGraph(&GG,10);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	//addEdge(&G, 0, 1, 0);
-	//addEdge(&G, 1, 2, 0);
-	#if 0
-	for (i = 0; i < 10; i++) 
-		addVertex(&G, i);
-	for (i = 0; i < 10; i++) 
-		addRandomEdge(&G, 0);
-	listVertices(&G);
-	listEdges(&G);
-	nGraphFree(&G);
-
-	struct nGraph B;
-	nGraphInit(&B, 'B');
-	makeCompleteGraph(&B, 4);
-	listVertices(&B);
-	listEdges(&B);
-	nGraphFree(&B);
-
-	//addEdge(&G, 0, 1, 0);
-	//addEdge(&G, 1, 2, 0);
-
-	makeAdjacency(&G);
-	printAdjacency(&G);
-	addVertex(&G, 30);
-	addVertex(&G, 29);
-	addEdge(&G, 0, 30, 0);
-	addEdge(&G, 29, 30, 0);
-	listEdges(&G);
-	printAdjacency(&G);
-
-	makeAdjacency(&B);
-	printAdjacency(&B);
-	#endif
 
 	return 0;
 } 
