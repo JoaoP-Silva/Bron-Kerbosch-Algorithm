@@ -561,7 +561,7 @@ void BK(struct nGraph PP,struct nGraph P, struct nGraph R, struct nGraph X){
 
 }
 
-struct nGraph FindingCliques(struct nGraph G1)
+struct nGraph FindingCliques(struct nGraph G1, double* time, int* size)
 {
 
 	struct vertex *tmp1 = G1.V->head;
@@ -589,14 +589,21 @@ struct nGraph FindingCliques(struct nGraph G1)
 	BK(G1,P,R,X);
 	clock_t toc = clock();
 	printf("%s\n", "==================");
-		//printf("%d\n", G1.E->count);
-		printf("%s","Maximum:  ");
-		listVertices(&max);
-		
+	//printf("%d\n", G1.E->count);
+	printf("%s","Maximum:  ");
+	listVertices(&max);
+
+	int siz = max.V->count;
+
+	*size = siz;
+	
+	printf("O tamanho da clique maximo e igual a %d\n", *size);
+
+	
 
 	printf("%s\n", "==================");
 		
-	
+	*time = (double)(toc - tic) / CLOCKS_PER_SEC;
 	printf("Elapsed: %f seconds\n", (double)(toc - tic) / CLOCKS_PER_SEC);
 
 	return G1;

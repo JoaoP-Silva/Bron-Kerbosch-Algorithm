@@ -159,7 +159,19 @@ int main(int argc, char *argv[])
 	printf("%s\n","*****************************");
 	printf("%s\n", "");
 	
-	struct nGraph G21=FindingCliques(GG);
+
+
+	int size; 
+	double time;
+
+	struct nGraph G21=FindingCliques(GG, &time, &size);
+
+	FILE* fOutPtr;
+	fOutPtr = fopen("output.txt", "a");
+	
+	fprintf(fOutPtr, "%lf,", time);
+	fprintf(fOutPtr, "%d,", size);
+
 
 	return 0;
 } 
